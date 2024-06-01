@@ -1,0 +1,39 @@
+{% load static %}
+{% include 'header.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <h1 class="gadget-list-title">Список гаджетов</h1>
+    <ul class="gadget-list">
+        {% for gadget in gadgets %}
+            <li class="gadget-item">
+                <h2 class="gadget-title">{{ gadget.name }}</h2>
+                <a class="gadget-detail-link" href="{% url 'shop_detail' gadget.id %}">Подробнее</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h1 class="comments-title">Comments:</h1>
+    <div class="comments-section">
+        {% for comment in comments %}
+            <p class="comment-text">{{ comment.text}}</p>
+        {% endfor %}
+    </div>
+
+    <h2 class="add-comment-title">Добавить комментарий</h2>
+    <form action="{% url 'create_comment' %}" method="POST" class="comment-form">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit" class="btn btn-secondary">Добавить комментарий</button>
+    </form>
+
+</div>
+
+{% include 'footer.html' %}
+</body>
+</html>

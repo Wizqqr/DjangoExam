@@ -1,0 +1,35 @@
+{% load static %}
+{% include 'header.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <h1 class="phone-title">{{ shop_id.name }}</h1>
+    <p class="phone-price">{{ shop_id.price }}</p>
+    <p class="phone-description">{{ shop_id.description }}</p>
+    <img class="phone-image" src="{{ shop_id.image.url }}">
+
+    <h2 class="reviews-title">Отзывы</h2>
+    <table class="reviews-table" border="2">
+        <tr>
+            <th>Оценка</th>
+            <th>Отзыв</th>
+            <th>Дата отзыва</th>
+        </tr>
+        {% for i in shop_id.gadget.all %}
+        <tr>
+            <td>{{ i.stars }}</td>
+            <td>{{ i.text }}</td>
+            <td>{{ i.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% include 'footer.html' %}
+</body>
+</html>
